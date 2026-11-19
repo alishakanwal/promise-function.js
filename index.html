@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Assignment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #faf9f6;
+            color: #55545c;
+            padding: 25px 40px;
+            line-height: 1.7;
+        }
+        h1 {
+            text-align: center;
+            color: #526657;
+        }
+        .topics {
+            text-align: center;
+            color: #9a858e;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #657c68;
+            margin-top: 30px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e8d8d6;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .card {
+    background-color: #ffffff;
+    border: 1px solid #eee9e5;
+    border-top: 4px solid #dcbfc8;
+    border-radius: 10px;
+    padding: 18px;
+    min-width: 0;
+    box-shadow: 0 5px 18px rgba(120, 110, 110, 0.06);
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 9px 22px rgba(120, 110, 110, 0.12);
+    border-color: #c6d8c3;
+    border-top-color: #718574;
+}
+.card:active {
+    border-color: #c79eac;
+    border-top-color: #98717e;
+}
+        pre {
+            background-color: #263b32;
+            color: #e6eee5;
+            padding: 12px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+        .output {
+            background-color: #f8eeee;
+            color: #806b74;
+        }
+        .how-to-check {
+            background-color: #ffffff;
+            border: 1px solid #eee9e5;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .how-to-check h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .steps {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .step {
+            background-color: #f3f5ef;
+            border-left: 4px solid #c6d8c3;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        .step span {
+            color: #98717e;
+            background-color: #f8eeee;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .step h3 {
+            color: #657c68;
+            font-size: 16px;
+            margin: 6px 0 4px;
+        }
+        .step p {
+            font-size: 14px;
+        }
+        .note {
+            background-color: #f8eeee;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 18px;
+            font-size: 14px;
+        }
+        @media (max-width: 750px) {
+            body {
+                padding: 20px 15px;
+            }
+            .grid,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript Assignment</h1>
+    <p class="topics">Topic: Promises</p>
+
+    <h2>Promises</h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>Q1. Bank Account Withdrawal</h3>
+            <pre>
+let balance = 10000;
+let withdrawalAmount = 7000;
+
+let withdrawal = new Promise((resolve, reject) => {
+
+    if (balance >= withdrawalAmount) {
+        resolve("Withdrawal Successful!");
+    } else {
+        reject("Insufficient Balance!");
+    }
+
+});
+
+withdrawal
+    .then((result) => {
+        console.log(result);
+        console.log("Remaining Balance:", balance - withdrawalAmount);
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+</pre>
+            <pre class="output">Withdrawal successful. Remaining balance: Rs. 3000</pre>
+        </div>
+
+        <div class="card">
+            <h3>Q2. Online Exam Result</h3>
+            <pre>let marks = 75;
+
+let result = new Promise(function (resolve, reject) {
+    if (marks > 100 || marks < 0) {
+        reject("Invalid marks");
+    } else if (marks >= 50) {
+        resolve("Pass");
+    } else {
+        resolve("Fail");
+    }
+});
+
+result
+    .then(function (message) {
+        console.log(message);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });</pre>
+            <pre class="output">Pass</pre>
+        </div>
+
+        <div class="card">
+            <h3>Q3. Product Delivery System</h3>
+            <pre>let delivered = true;
+
+let delivery = new Promise(function (resolve, reject) {
+    setTimeout(function () {
+        if (delivered) {
+            resolve("Product Delivered Successfully");
+        } else {
+            reject("Delivery Failed");
+        }
+    }, 3000);
+});
+
+delivery
+    .then(function (message) {
+        console.log(message);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });</pre>
+            <pre class="output">Product Delivered Successfully (after 3 seconds)</pre>
+        </div>
+
+        <div class="card">
+            <h3>Q4. Promise Chaining</h3>
+            <pre>let numberPromise = new Promise(function (resolve) {
+    resolve(10);
+});
+
+numberPromise
+    .then(function (num) {
+        return num + 20;
+    })
+    .then(function (num) {
+        return num * 2;
+    })
+    .then(function (num) {
+        return num - 5;
+    })
+    .then(function (num) {
+        console.log("Final Result: " + num);
+    });</pre>
+            <pre class="output">Final Result: 55</pre>
+        </div>
+
+    </div>
+
+    <div class="how-to-check">
+        <h2>How to Check the Result</h2>
+        <p>Follow these steps to check the output of the JavaScript programs:</p>
+        <div class="steps">
+            <div class="step">
+                <span>01</span>
+                <h3>Open the JavaScript File</h3>
+                <p>Open the JavaScript file in your code editor and make sure the code is saved.</p>
+            </div>
+            <div class="step">
+                <span>02</span>
+                <h3>Open the HTML Page</h3>
+                <p>Open the HTML file in Google Chrome or another web browser.</p>
+            </div>
+            <div class="step">
+                <span>03</span>
+                <h3>Open Developer Tools</h3>
+                <p>Right-click on the webpage and select Inspect.</p>
+            </div>
+            <div class="step">
+                <span>04</span>
+                <h3>Go to the Console</h3>
+                <p>Click the Console tab in Developer Tools to view the JavaScript output.</p>
+            </div>
+            <div class="step">
+                <span>05</span>
+                <h3>Check the Output</h3>
+                <p>Run the JavaScript program and check the result displayed in the Console.</p>
+            </div>
+        </div>
+        <p class="note">
+            Note: If the program uses prompt(), enter the requested value
+            when the popup appears. The result will be displayed in the Console.
+        </p>
+    </div>
+
+    <script>
+        /* Q1: Q.Bank Account Withdrawal
+
+Create a Promise for withdrawing money.
+
+Conditions:
+- Account balance = Rs. 10,000
+- Withdrawal amount = Rs. 7,000
+- If balance is sufficient, resolve the Promise.
+- Otherwise, reject the Promise.
+Use .then() and .catch() to display the result.*/
+let balance = 10000;
+let withdrawalAmount = 7000;
+
+let withdrawal = new Promise((resolve, reject) => {
+    if (balance >= withdrawalAmount) {
+        resolve("Withdrawal Successful!");
+    } else {
+        reject("Insufficient Balance!");
+    }
+});
+withdrawal
+    .then((result) => {
+        console.log(result);
+        console.log("Remaining Balance:", balance - withdrawalAmount);
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+/* Q2:Q. Online Exam Result
+
+Create a Promise that checks student results.
+- Marks 50 or above: Pass.
+- Marks below 50: Fail.
+- Marks greater than 100 or less than 0: Invalid marks.
+Handle the result using .then() and .catch().*/
+let marks = 75;
+let examResult = new Promise((resolve, reject) => {
+    if (marks > 100 || marks < 0) {
+        reject("Invalid Marks!");
+    }
+    else if (marks >= 50) {
+        resolve("Congratulations! You Passed.");
+    }
+    else {
+        reject("Sorry! You Failed.");
+    }
+});
+examResult
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+
+/* Q3:Q. Product Delivery System
+Create a Promise for an online shopping delivery.
+Use setTimeout() to simulate a 3-second delivery process.
+- After 3 seconds, resolve with "Product Delivered Successfully".
+- If delivery is unsuccessful, reject with "Delivery Failed".
+Display the result using .then() and .catch().*/
+
+
+let delivery = new Promise((resolve, reject) => {
+
+    setTimeout(() => {
+        let isDelivered = true;
+
+        if (isDelivered) {
+            resolve("Product Delivered Successfully");
+        }
+        else {
+            reject("Delivery Failed");
+        }
+
+    }, 3000);
+
+});
+
+delivery
+    .then((result) => {
+        console.log(result);
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+
+/*Q4:Q. Promise Chaining
+
+Create a Promise that performs these operations:
+1. Start with a number: 10.
+2. Add 20.
+3. Multiply the result by 2.
+4. Subtract 5.
+5. Display the final result.
+Use Promise chaining with multiple .then() methods.*/
+let calculation = new Promise((resolve, reject) => {
+    resolve(10);
+});
+
+calculation
+    .then((number) => {
+        return number + 20;
+    })
+    .then((number) => {
+        return number * 2;
+    })
+    .then((number) => {
+        return number - 5;
+    })
+    .then((result) => {
+        console.log("Final Result:", result);
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+
+</script>
+</body>
+</html>
